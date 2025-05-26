@@ -1,0 +1,60 @@
+@use '../../styles/variables' as vars;
+
+.radio {
+  border: 1px solid vars.$color-slate-700;
+  border-radius: 4px;
+  padding: 4px 18px;
+  
+}
+.checkedRadio {
+  border-color: vars.$color-lime;
+}
+.hidden {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.customRadioLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.25rem 0; 
+  transition: color 0.2s ease-in-out; 
+}
+
+.customRadio {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid vars.$color-slate-500;
+  border-radius: 50%;
+  margin-right: 0.8rem;
+  position: relative;
+  transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  flex-shrink: 0; 
+
+  &::after {
+    content: '';
+    display: block;
+    width: 0.625rem;
+    height: 0.625rem;
+    background: vars.$color-lime; 
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s ease-in-out; 
+  }
+}
+
+.hidden:checked + .customRadioLabel .customRadio {
+  border-color: vars.$color-lime;
+  background-color: #fff;
+  &::after {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

@@ -1,0 +1,71 @@
+@use '../../styles/variables' as vars;
+
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  .wrapper{
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid vars.$color-slate-700;
+    border-radius: 4px;
+    &:hover {
+      border-color: vars.$color-slate-900;
+    }
+     &:focus-within {
+      border-color: vars.$color-lime;
+      .icon{
+        background-color: vars.$color-lime;
+        color: vars.$color-slate-900;
+      }
+    }
+    .icon {
+      position: absolute;
+      padding: 7px 10px;
+      background-color: vars.$color-slate-100;
+      color: vars.$color-slate-700;
+    }
+    input {
+      padding: 6px 18px;
+      color: vars.$color-slate-900;
+      border: none;
+      flex-grow: 1;
+      background-color: transparent;
+      outline: none;
+    }
+  }
+
+  .left {
+    .icon {
+      left: 0;
+    }
+    input {
+      padding-left: 44px;
+    }
+  }
+
+  .right {
+    .icon {
+      right: 0;
+    }
+    input {
+      padding-right: 60px;
+    }
+  }
+  
+}
+.label {
+  color: vars.$color-slate-700;
+}
+
+.error {
+  .wrapper {
+    border-color: vars.$color-red;
+    .icon{
+        background-color: vars.$color-red;
+        color: vars.$color-white;
+      }
+  }
+}

@@ -1,0 +1,40 @@
+@use './styles/variables' as vars;
+@import 'normalize.css';
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url('/fonts/PlusJakartaSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'PlusJakartaSans';
+  src: url('/fonts/PlusJakartaSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+
+body {
+  font-family: 'PlusJakartaSans', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  @media (min-width: 900px) {
+    padding: 75px;
+    background-color: vars.$color-slate-100;
+  }
+}
+
+h1, h2 {
+  font-weight: 700;
+}
+.calculator{
+  background-color: vars.$color-white;
+  border-radius: 20px;
+  @media (min-width: 900px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    section:last-child {
+      border-radius: 20px;
+      border-bottom-left-radius: 60px;
+    }
+  }
+}

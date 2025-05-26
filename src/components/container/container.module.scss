@@ -1,0 +1,15 @@
+@use '../../styles/variables' as vars;
+.container {
+  padding: 36px 16px;
+    @media (min-width: 900px) {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+}
+.primary {
+  color: vars.$color-slate-900;
+}
+.secondary {
+  background-color: vars.$color-slate-700;
+  color: vars.$color-white;
+}
