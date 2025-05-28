@@ -1,14 +1,12 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { ClearButton } from "../clearButton";
 import { Container } from "../container";
 import Input from "../input/Input";
-import Radio from "../radio/Radio";
 import Button from "../button/Button";
 import styles from './Form.module.scss';
 import { yupResolver } from "@hookform/resolvers/yup";
 import { validationSchema } from "../../schemas/formValidation";
-import ErrorMessage from "../errorMessage/ErrorMessage";
 import { calculateMortgage } from "../../features/calculateMortgage";
+import RadioGroup from "../radioGroup/RadioGroup";
 
 export type IForm = {
   amount: number;
@@ -27,11 +25,14 @@ export const Form: React.FC<Props> = ({onCalculated, onClear}) => {
     mode: "onBlur",
   });
 
-
-
   const onSubmit: SubmitHandler<IForm> = (data) => onCalculated(
     calculateMortgage(data).monthly, calculateMortgage(data).total
   );
+
+  const handleResetForm = () => {
+    reset();
+    onClear();
+  };
 
   return (
     <Container status="primary">
@@ -39,7 +40,13 @@ export const Form: React.FC<Props> = ({onCalculated, onClear}) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.headWrapper}>
             <h1 className="title">Mortgage Calculator</h1>
-            <ClearButton reset={reset} onClear={onClear} />
+            <Button
+              type="button"
+              classNameProp="clear"
+              onClick={handleResetForm}
+            >
+              Clear All
+            </Button>
           </div>
         
           <Input 
@@ -72,19 +79,23 @@ export const Form: React.FC<Props> = ({onCalculated, onClear}) => {
             Interest Rate
           </Input>
 
-          <div className={styles.radios}>
-            <h3>Mortgage Type</h3>
-            <Radio name="mortgage-type" value='Repayment' register={register} watch={watch}>
-              Repayment
-            </Radio>
-            <Radio name="mortgage-type" value='Interest' register={register} watch={watch}>
-              Interest Only
-            </Radio>
+          <RadioGroup
+            name="mortgage-type"
+            register={register}
+            watch={watch}
+            radios={[
+              {value: 'Repayment', label: 'Repayment'},
+              {value: 'Interest', label: 'Interest Only'},
+            ]}
+            error={errors['mortgage-type']}
+          >
+            Mortgage Type
+          </RadioGroup>
 
-            {errors['mortgage-type'] && <ErrorMessage message={errors['mortgage-type']?.message} />}
-          </div>
-
-          <Button><img src="icon-calculator.svg" alt="calculator"/>Calculate Repayments</Button>
+          <Button type="submit" classNameProp="send">
+            <img src="icon-calculator.svg" alt="calculator" />
+            Calculate Repayments
+          </Button>
         </form>
         
       </div>

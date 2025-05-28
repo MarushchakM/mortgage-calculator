@@ -2,6 +2,7 @@ import { type FieldError, type UseFormRegister } from 'react-hook-form';
 import styles from './Input.module.scss';
 import type { IForm } from '../form';
 import ErrorMessage from '../errorMessage/ErrorMessage';
+import classNames from 'classnames';
 
 type Orient = 'left' | 'right';
 
@@ -23,10 +24,19 @@ const Input: React.FC<Props> = ({
   error
 }) => {
   return (
-    <div className={`${styles.input} ${error ? styles.error : ''}`}>
-      <label htmlFor={name} className={styles.label}>{children}</label>
-      <div className={`${styles.wrapper} ${styles[orient]}`}>
-        <span className={styles.icon}>{icon}</span>
+    <div className={
+      classNames(styles.input, { [styles.error]: error })
+    }>
+      <label htmlFor={name} className={styles.label}>
+        {children}
+      </label>
+
+      <div className={classNames(styles.wrapper, styles[orient])}>
+
+        <span className={styles.icon}>
+          {icon}
+        </span>
+
         <input type="text" id={name} {...register(name)} />
       </div>
       {error && <ErrorMessage message={error.message} />}

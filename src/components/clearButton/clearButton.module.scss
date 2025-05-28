@@ -1,9 +1,0 @@
-@use '../../styles/variables' as vars;
-
-.button {
-  background-color: transparent;
-  border: none;
-  text-decoration: underline;
-  cursor: pointer;
-  color: vars.$color-slate-700;
-}

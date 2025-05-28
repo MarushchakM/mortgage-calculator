@@ -22,11 +22,16 @@ const Result: React.FC<Props> = ({ monthly, total}) => {
           <div className={styles.resultBlock}>
             <div className={styles.monthly}>
               <p>Your monthly repayments</p>
-              <p className={styles.monthlyMoney}>£{monthly.toLocaleString('en-US')}</p>
+              <p className={styles.monthlyMoney}>
+                £{monthly.toLocaleString('en-US')}
+              </p>
             </div>
+
             <div className={styles.total}>
               <p>Total you'll repay over the term</p>
-              <p className={styles.totalMoney}>£{total.toLocaleString('en-US')}</p>
+              <p className={styles.totalMoney}>
+                £{total.toLocaleString('en-US')}
+              </p>
             </div>
           </div>
         </div>

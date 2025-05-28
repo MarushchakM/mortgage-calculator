@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import styles from './container.module.scss';
 
 type Status = 'primary' | 'secondary';
@@ -8,7 +9,9 @@ type Props = {
 
 export const Container: React.FC<Props> = ({ children, status }) => {
   return (
-    <section className={`${styles.container} ${styles[status]}`}>
+    <section className={
+      classNames(styles.container, styles[status])
+    }>
       {children}
     </section>
   );
